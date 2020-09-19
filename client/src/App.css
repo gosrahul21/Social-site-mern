@@ -17,7 +17,7 @@
     font-family: 'Raleway', sans-serif;
     font-size: 1rem;
     line-height: 1.6;
-    background-color: #fff;
+    background-color: rgb(243, 245, 247);
     color: #333;
   }
   
@@ -333,8 +333,8 @@
   /* Landing Page */
   .landing {
     position: relative;
-    background: url('./img/network.jpg') no-repeat center center/cover;
-    height: 110vh;
+    background: url('./img/showcase.jpg') no-repeat center center/cover;
+    height: 100vh;
   }
   
   .landing-inner {

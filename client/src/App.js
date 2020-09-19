@@ -1,45 +1,61 @@
-import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
+import React,{Fragment,useEffect } from 'react';
+import {BrowserRouter as Router , Route,Switch} from 'react-router-dom';
 import Landing from './components/layout/Landing';
-import Routes from './components/routing/Routes';
-import { LOGOUT } from './actions/constant';
-
-// Redux
-import { Provider } from 'react-redux';
-import store from './store';
-import { loadUser } from './actions/auth';
-import setAuthToken from './utils/setAuthToken';
-
+import Navbar from './components/layout/Navbar'
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 import './App.css';
+import store from './store';
+import {Provider} from 'react-redux'; 
+import Alert from "./components/layout/Alert";
+import {loadUser} from './actions/auth';
+import connect from  'react-redux';
+import Dashboard from './components/dashboard/Dashboard'
+import PrivateRoute from "./routing/PrivateRoute";
+import CreateProfile from "./components/profile-forms/CreateProfile";
+import {getCurrentProfile} from './actions/profile';
+import AddExperience from './components/profile-forms/AddExperience';
+import AddEducation from './components/profile-forms/AddEducation'
+
+
+
+
 
 const App = () => {
-  useEffect(() => {
-    // check for token in LS
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-    store.dispatch(loadUser());
 
-    // log user out from all tabs if they log out in one tab
-    window.addEventListener('storage', () => {
-      if (!localStorage.token) store.dispatch({ type: LOGOUT });
-    });
-  }, []);
 
-  return (
-    <Provider store={store}>
-      <Router>
-        <Fragment>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route component={Routes} />
-          </Switch>
-        </Fragment>
-      </Router>
-    </Provider>
-  );
-};
+  useEffect(()=>{
+      store.dispatch(loadUser());
+      store.dispatch(getCurrentProfile())
+  },[])
+
+
+    return (
+        <Provider store= {store}>
+
+        
+        <Router>
+        <div>
+           <Navbar/>
+           <Route exact path="/" component={Landing}/>
+           <section className="container">
+               <Alert/>
+               <Switch>
+                   <Route exact path="/register" component={Register}/>
+                   <Route exact path="/login" component={Login}/>
+                   <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+                   <PrivateRoute exact path="/create-profile" component={CreateProfile}/>
+                   <PrivateRoute exact path="/add-experience" component={AddExperience}></PrivateRoute>
+                   <PrivateRoute exact path="/add-education" component ={ AddEducation}/>
+                   <PrivateRoute exact path="/edit-profile" component={CreateProfile}/>
+               </Switch>
+           </section>
+        </div>
+        </Router>
+        </Provider>
+        
+    )
+}
+
 
 export default App;

@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react';
-import spinner from './spinner.gif';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-export default () => (
-  <Fragment>
-    <img
-      src={spinner}
-      style={{ width: '200px', margin: 'auto', display: 'block' }}
-      alt='Loading...'
-    />
-  </Fragment>
-);
+const Spinner = props => {
+    return (
+        <div className="ui segment">
+  <div className="ui active inverted dimmer">
+    <div className="ui massive text loader">Loading</div>
+  </div>
+  <p></p>
+</div>
+    )
+}
+
+
+export default Spinner

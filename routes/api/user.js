@@ -18,6 +18,7 @@ router.get('/',(req,res)=>{
 router.post('/',async (req,res)=>{
     try{
         
+        
         const {name,email,password} = req.body;
         let user = await User.findOne({email:email});
         if(user)
@@ -55,7 +56,7 @@ router.post('/',async (req,res)=>{
             {expiresIn:360000},
             (err,token)=>{
                 if(err) throw err;
-                res.json({token});
+                res.json({user:doc,token});
             }
             );
 
@@ -74,10 +75,6 @@ router.get('/all',(req,res)=>{
     })
 });
 
-
-router.put('/experience',auth,async (req,res) => {
-
-})
 
 
 router.get('/:id',async (req,res)=>{

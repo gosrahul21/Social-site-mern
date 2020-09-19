@@ -1,84 +1,77 @@
-import React from 'react'
-import {Fragment,useState} from 'react';
-import {Link,Redirect} from 'react-router-dom';
-import axios from 'axios';
-import {connect} from 'react-redux';
-// import propTypes from 'prop-Types';
-import {login} from '../../actions/auth';
-const Login= ({login,isAuth}) => {
+import React,{useState} from 'react';
+import { Link, Redirect } from "react-router-dom";
+import axios from "axios";
+import {login} from '../../actions/auth'
+import {connect} from 'react-redux'
 
-    const [LoginformData,setLoginFormData] =useState({
+ const Login = (props) => {
+
+    const [formData,setFormData] =useState({
         email:'',
         password:''
     });
-    const [viewPassword,setViewPassword] = useState("password");
-    const {email,password} = LoginformData
-    const onSubmitForm = async(e)=>{
-        e.preventDefault();
-        login(email,password);
-        
-            
-            
-    };
+    const {email,password} =formData
 
-    //redirect if login
-   if(isAuth){
-       return <Redirect to="/dashboard"></Redirect>
-   }
+    const onChange=(e)=>{
+        setFormData({
+            ...formData,
+            [e.target.name]:e.target.value
+        });
 
-    const onChangeData=(e)=>{
-        setLoginFormData({...LoginformData,[e.target.name]:e.target.value})
-        console.log(e.target.value);
     }
-   
-    return (
-        <Fragment>
-            <section className="container">
-      <h1 className="large text-primary">Sign In</h1>
-      <p className="lead"><i className="fas fa-user"></i></p>
-      <form className="form" action="create-profile.html" onSubmit={onSubmitForm}>
 
+    const onSubmit = async(e) =>{
+        e.preventDefault();
+        props.login(formData)
+        
+    }
+
+    if(props.isAuthenticated)
+    {
+      return <Redirect to='/dashboard'></Redirect>
+    }
+
+
+    return (
+        <div>
+    <section className="container">
+      <h1 className="large text-primary">Sign Up</h1>
+      <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
+      <form className="form" onSubmit={onSubmit} action="create-profile.html">
+        
         <div className="form-group">
-          <input type="email" placeholder="Email Address" onChange={onChangeData} name="email" required/>
-          
-          
+          <input type="email"  value={email} onChange={onChange} placeholder="Email Address" name="email" />
+          <small className="form-text"
+            >This site uses Gravatar so if you want a profile image, use a
+            Gravatar email</small
+          >
         </div>
         <div className="form-group">
           <input
-            type={viewPassword}
+            type="password"
             placeholder="Password"
+            value={password}
+            onChange={onChange}
             name="password"
-            onChange={onChangeData}
             minLength="6"
           />
-          <input type="checkbox" onChange={()=>{
-              if(viewPassword==="password")
-              {
-                  setViewPassword("text");
-              }
-              else
-              setViewPassword("password")
-          }} autoComplete="off" />
-          <label>   View password</label>
         </div>
         
-        {/* <input type="submit" className="btn btn-primary" value="" /> */}
-        <button type="submit" className="btn btn-primary">Log In</button>
+        <input type="submit"  className="btn btn-primary" value="Log In" />
       </form>
       <p className="my-1">
-        Don't have an account? <Link to="/register">Sign up</Link>
+       Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
     </section>
-        </Fragment>
+        </div>
     )
+    
 }
 
-//proptypes
-
-const mapStateToProps=(state)=>{
-   return {
-    isAuth:state.auth.isAuthenticated
-   }
-}
+const mapStateToProps=(state)=>(
+  {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+)
 
 export default connect(mapStateToProps,{login})(Login);

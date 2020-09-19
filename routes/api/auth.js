@@ -63,7 +63,7 @@ router.post('/',async (req,res)=>{
 
         user.tokens = user.tokens.concat({token});
         await user.save();
-        res.status(201).send({token}) ;
+        res.status(201).send({user,token}) ;
 
          
          
@@ -76,6 +76,18 @@ router.post('/',async (req,res)=>{
 
 
 
-
+router.get('/logout',authmid,(req,res)=>{
+    
+    //const user = User.findById(req.user.id);
+    
+    req.user.tokens=req.user.tokens.filter((tokens)=>{
+        return tokens.token!==req.token
+    })
+    req.user.save();
+    console.log(req.user.tokens.length);
+    delete req.user;
+    delete req.token;
+    res.send({msg:"logout done"})
+})
 
 module.exports = router;

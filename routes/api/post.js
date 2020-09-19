@@ -18,6 +18,7 @@ router.get('/me',auth,async (req,res) => {
   }
 });
 router.post('/',auth,async (req,res) => {
+  console.log("post runned");
   const user = await User.findById(req.user.id).selected('-password');
   
   try {

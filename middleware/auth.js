@@ -19,7 +19,8 @@ module.exports=  async function(req,res,next){
         const decoded = jwt.verify(token,config.get('jwtSecret'));
         const user = await User.findById(decoded.user.id);
         req.user = user;
-        console.log(req.user);
+        //console.log(req.user);
+        req.token=token;
 
         
         next();
