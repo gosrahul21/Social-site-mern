@@ -1,4 +1,4 @@
-import { GET_PROFILE,LOGOUT,PROFILE_ERROR, UPDATE_PROFILE } from "../actions/types";
+import { GET_PROFILE,GET_PROFILES,GET_PROFILE_ID,GET_REPOS,LOGOUT,PROFILE_ERROR, UPDATE_PROFILE } from "../actions/types";
 
 
 
@@ -16,11 +16,28 @@ const profile=(state=initialState,action)=>{
     switch(type){
         case GET_PROFILE:
         case UPDATE_PROFILE:
+        case GET_PROFILE_ID:
             return {
                 ...state,
                 profile:payload,
                 error:{},
                 loading:false
+            }
+        case GET_PROFILES:
+        
+            console.log({payload})
+             return {
+                 ...state,
+                 profiles:payload,
+                 loading:false,
+                 error:{}
+             }
+        case GET_REPOS:
+            return {
+                ...state,
+                loading:false,
+                repos:payload,
+                error:{}
             }
         case PROFILE_ERROR:
         case LOGOUT:

@@ -176,8 +176,9 @@
   .bg-dark,
   .badge-dark,
   .alert-dark {
-    background: var(--dark-color);
-    color: #fff;
+    /* background: var(--dark-color); */
+    background: rgb(168, 7, 15);
+    color:rgb(236, 105, 29);
   }
   
   .btn-danger,
@@ -301,6 +302,7 @@
   /* Navbar */
   .navbar {
     display: flex;
+    color:red;
     justify-content: space-between;
     align-items: center;
     padding: 0.7rem 2rem;
@@ -324,6 +326,7 @@
   
   .navbar a:hover {
     color: var(--primary-color);
+
   }
   
   .navbar .welcome span {

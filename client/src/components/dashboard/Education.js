@@ -8,6 +8,7 @@ import {deleteEducation} from '../../actions/profile'
 const Education = props => {
     console.log(props.educations) 
     const {education} = props;
+
     const educations = education.map((edu)=>(
         <tr key={edu._id}>
         <td>{edu.school}</td>
@@ -37,6 +38,7 @@ const Education = props => {
                     
                     </tr>
                 </thead>
+
                 <tbody>{educations}</tbody>
             </table>
         </div>

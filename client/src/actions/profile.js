@@ -5,7 +5,9 @@ import {setAlert} from './alert';
 import {
     GET_PROFILE,
     PROFILE_ERROR,
-    UPDATE_PROFILE
+    UPDATE_PROFILE,
+    GET_REPOS,
+    GET_PROFILES, GET_PROFILE_ID
 } from './types';
 
 
@@ -185,3 +187,60 @@ export const deleteEducation =(id) =>{
         }
     }
 }
+
+export const getAllProfiles = () => {
+    return async (dispatch) => {
+
+        try{
+
+            const profiles = await axios.get('/api/profile');
+            console.log({profiles:profiles.data})
+            dispatch({
+                type:GET_PROFILES,
+                payload:profiles.data
+            })
+
+        } catch(err){
+            dispatch({
+                type:PROFILE_ERROR,
+                payload:{msg:err.response.statusText,status:err.response.status}
+            });
+        }
+    }
+}
+
+export const getGithubRepos =(username) => {
+    return async dispatch => {
+       try{
+        const repos = await axios.get('/api/profile/'+username);
+        dispatch({
+            type: GET_REPOS,
+            payload: repos.data
+        });
+       } catch(err){
+        dispatch({
+            type:PROFILE_ERROR,
+            payload:{msg:err.response.statusText,status:err.response.status}
+        })
+       }
+    }
+}
+
+export const getProfileById = userId => async (dispatch) => {
+    try{
+        console.log(userId)
+        const res = await axios.get(`/api/profile/${userId}`);
+        console.log(res.data)
+         dispatch({
+             type:GET_PROFILE_ID,
+             payload:res.data
+         });
+    } catch(err) {
+        dispatch({
+            type:PROFILE_ERROR,
+            payload:{msg:err.response.statusText,status:err.response.status}
+        });
+    }
+}
+
+

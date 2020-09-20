@@ -29,7 +29,7 @@ const Dashboard = props => {
                    <p className="lead">
                        <i className="user large icon"></i> WELCOME {auth.user&&auth.user.name}
                    </p>{profile.profile!==null?(<Fragment><DashboardAction/>
-                   
+                    
                    <Experience experience ={profile.profile.experience}/>
                    <Education education={profile.profile.education}/></Fragment>):
                    (

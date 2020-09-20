@@ -1,4 +1,7 @@
 {
     "mongoURI":"mongodb://localhost:27017/Project_Udemy",
-    "jwtSecret":"myjwttoken"
+    "jwtSecret":"myjwttoken",
+    "githubClientId":"939dd1211e0139cb2bed",
+    "githubSecret":"a5250bb6f932d5c2ea67d3d7c4ce6177ad094175"
+
 }
