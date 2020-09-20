@@ -160,7 +160,8 @@
   .bg-primary,
   .badge-primary,
   .alert-primary {
-    background: var(--primary-color);
+    /* background: var(--primary-color); */
+    background:var(--success-color);
     color: #fff;
   }
   
@@ -377,6 +378,7 @@
   .profile-top {
     grid-area: top;
     display: flex;
+    color:fff;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -387,6 +389,13 @@
     width: 250px;
   }
   
+  .fa-facebook{
+    color:blue;
+  }
+  .fa-twitter{
+   
+    color:rgb(52, 162, 236);
+  }
   .profile-top .icons a {
     color: #fff;
     margin: 0 0.3rem;
@@ -485,6 +494,15 @@
     font-size: 0.8rem;
   }
   
+  .fa-instagram{
+    color:red;
+  }
+  .fa-youtube{
+    color:red;
+  }
+  .fa-linkedin{
+    color:rgb(66, 97, 238)
+  }
   .post .post-date {
     color: #aaa;
     font-size: 0.8rem;
