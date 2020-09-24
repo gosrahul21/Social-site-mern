@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import {createProfile} from '../../actions/profile';
 import {Link,withRouter} from 'react-router-dom'
-
-
+import InputAvatar from '../profile/InputAvatar'
 
 const CreateProfile = props => {
     
@@ -16,6 +15,7 @@ const CreateProfile = props => {
         location:'',
         status:'',
         skills:'',
+        avatar:'',
         githubusername:'',
         bio:'',
         twitter:'',
@@ -32,6 +32,7 @@ const CreateProfile = props => {
     location,
     status,
     skills,
+    avatar,
     githubusername,
     bio,
     twitter,
@@ -50,6 +51,9 @@ const CreateProfile = props => {
         createProfile(formData,history);
     }
 
+    const onHandleFileSummit=(e)=>{
+      setFormData({...formData,[e.target.name]:e.target.file[0]});
+    }
     return (
         <div className="ui form">
               <h1 class="large text-primary">
@@ -102,6 +106,9 @@ const CreateProfile = props => {
             HTML,CSS,JavaScript,PHP)</small
           >
         </div>
+        
+        <InputAvatar/>
+       
         <div class="form-group">
           <input
             type="text"

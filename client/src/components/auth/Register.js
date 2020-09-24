@@ -4,11 +4,13 @@ import { Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux';
 import {setAlert} from '../../actions/alert'
 import {register} from '../../actions/auth';
+
  const Register = (props) => {
 
     const {setAlert,isAuthenticated} =props;
 
-    
+    const [p_type1,set_ptype1]=useState("password");
+    const [p_type2,set_ptype2]=useState("password");
 
     const [ formData,setFormData ]= useState({
         name:'',
@@ -61,24 +63,23 @@ import {register} from '../../actions/auth';
         </div>
         <div className="form-group">
           <input type="email"  value={email} onChange={onChange} placeholder="Email Address" name="email" />
-          <small className="form-text"
-            >This site uses Gravatar so if you want a profile image, use a
-            Gravatar email</small
-          >
+          
         </div>
         <div className="form-group">
           <input
-            type="password"
+            type={p_type2}
             placeholder="Password"
             value={password}
             onChange={onChange}
             name="password"
             minLength="6"
           />
+           <input type="checkbox" name="togglepassword" onChange={()=>(p_type2)==="password"?set_ptype2("text"):set_ptype2("password")}/>
+         <label for="togglepassword"><span> view password</span></label>
         </div>
         <div className="form-group">
           <input
-            type="password"
+            type={p_type1}
             
             placeholder="Confirm Password"
             value={password2}
@@ -86,6 +87,8 @@ import {register} from '../../actions/auth';
             name="password2"
             minLength="6"
           />
+           <input type="checkbox" onChange={()=>(p_type1)==="password"?set_ptype1("text"):set_ptype1("password")}/>
+           <label for="togglepassword"><span> view password</span></label>
         </div>
         <input type="submit"  className="btn btn-primary" value="Register" />
       </form>

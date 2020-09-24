@@ -10,6 +10,7 @@ import {connect} from 'react-redux'
         email:'',
         password:''
     });
+    const [p_type,set_ptype] = useState("password");
     const {email,password} =formData
 
     const onChange=(e)=>{
@@ -41,20 +42,19 @@ import {connect} from 'react-redux'
         
         <div className="form-group">
           <input type="email"  value={email} onChange={onChange} placeholder="Email Address" name="email" />
-          <small className="form-text"
-            >This site uses Gravatar so if you want a profile image, use a
-            Gravatar email</small
-          >
+
         </div>
         <div className="form-group">
           <input
-            type="password"
+            type={p_type}
             placeholder="Password"
             value={password}
             onChange={onChange}
             name="password"
             minLength="6"
           />
+          <input type="checkbox" name="togglepassword" onChange={()=>(p_type)==="password"?set_ptype("text"):set_ptype("password")}/>
+          <label for="togglepassword"><span> view password</span></label>
         </div>
         
         <input type="submit"  className="btn btn-primary" value="Log In" />

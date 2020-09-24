@@ -2,13 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const ProfileTop = props => {
+
     return (
         <div className="profile-top bg-primary p-2">
           <img
             className="round-img my-1"
-            src={props.profile.user.avatar}
+            src={`http://localhost:4000/api/profile/image/${props.profile.user._id}`}
             alt=""
           />
+          {console.log(props.profile.user.avatar)}
           <h1 className="large">{props.profile.user.name}</h1>
           <p className="lead">{props.profile.status} {props.profile.company && <span>at {props.profile.company}</span>}</p>
           <p>{props.profile.location}</p>

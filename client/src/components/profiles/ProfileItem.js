@@ -12,7 +12,8 @@ const ProfileItem = props => {
     }}=props
     return (
         <div className="profile bg-light">
-          <img src={avatar} alt="" className="round-img"/>
+            {console.log(avatar.data)}
+          <img src={`http://localhost:4000/api/profile/image/${_id}`} alt="" className="round-img"/>
             <div>
             <h2>{name}</h2>
             <p>{status}</p>

@@ -5,6 +5,7 @@ const config = require('config');
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const multer =require('multer')
 
 
 
@@ -257,5 +258,41 @@ router.get('/github/:username',(req,res) => {
     } catch(err) {
         res.status(500).send(err);
     }
+});
+
+const upload = multer({
+    limits:{
+        fileSize:1000000
+    }
 })
+router.put('/avatar',auth,upload.single('avatar'),async (req,res)=>{
+try {
+    
+    if(req.file)
+    {
+        const user = req.user;
+        user.avatar= req.file.buffer;
+        await user.save();
+        return res.send(user);
+    }
+
+    res.status(404).send({error:"image not found"});
+} catch (error) {
+    res.status(500).send({error});
+}},(error,req,res,next)=>{
+    res.status(500).send({error});
+})
+
+
+router.get('/image/:id',async (req,res)=>{
+    try {
+        const user  = await User.findById(req.params.id);
+        res.set('Content-Type','image/png');
+        res.send(user.avatar);
+    } catch (error) {
+        
+    }
+})
+
+
 module.exports = router;

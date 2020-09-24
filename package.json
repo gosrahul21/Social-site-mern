@@ -1,14 +1,13 @@
 {
   "name": "udemy-project",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -25,7 +24,18 @@
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.3",
+    "multer": "^1.4.2",
     "request": "^2.88.2",
     "validator": "^13.1.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gosrahul21/Social-site-mern.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gosrahul21/Social-site-mern/issues"
+  },
+  "homepage": "https://github.com/gosrahul21/Social-site-mern#readme",
+  "description": ""
 }
