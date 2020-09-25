@@ -17,6 +17,8 @@ router.get('/me',auth,async (req,res) => {
     res.status(500).send({error:"Server error"});
   }
 });
+
+
 router.post('/',auth,async (req,res) => {
   console.log("post runned");
   const user = await User.findById(req.user.id).selected('-password');
@@ -84,9 +86,10 @@ router.delete('/:id',auth, async (req,res)=>{
 })
 
 //routes for likes
-//PUT api/posts/like/:id
+//PUT api/post/like/:id
 
 router.put('/like/:id',auth,async (req,res) =>{
+
   try {
     const post = await Post.findById(req.params.id);
 
@@ -98,16 +101,14 @@ router.put('/like/:id',auth,async (req,res) =>{
     {
       post.likes=likes;
       await post.save();
-      return res.status(201).send({message:"post unliked"});
+      return res.status(201).send(post.likes);
     }
-    
-    
     //post.likes.push({user:req.user.id});
     post.likes.unshift({user:req.user.id});
     await post.save();
-    return res.send(post);
+    return res.send(post.likes);
   } catch (error) {
-    res.send(error);
+    res.status(500).send(error);
   }
 })
 

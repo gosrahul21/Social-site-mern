@@ -10,10 +10,22 @@ const ProfileItem = props => {
         location,
         skills
     }}=props
+
+    const  arrayBufferToBase64=(buffer) => {
+        let binary = '';
+        let bytes = new Uint8Array(buffer);
+        let len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    }
+   // let base64String = btoa(String.fromCharCode(...new Uint8Array(avatar.data)));
+    //console.log(arrayBufferToBase64(avatar.data))
     return (
-        <div className="profile bg-light">
-            {console.log(avatar.data)}
-          <img src={`http://localhost:4000/api/profile/image/${_id}`} alt="" className="round-img"/>
+        <div className="profile bg-light ">
+         {/* <img src={base64String} className="round-img"/> */}
+            <img  src={`data:image/jpeg;base64,${arrayBufferToBase64(avatar.data)}`}  className="round-img"/> 
             <div>
             <h2>{name}</h2>
             <p>{status}</p>

@@ -51,9 +51,7 @@ const CreateProfile = props => {
         createProfile(formData,history);
     }
 
-    const onHandleFileSummit=(e)=>{
-      setFormData({...formData,[e.target.name]:e.target.file[0]});
-    }
+
     return (
         <div className="ui form">
               <h1 class="large text-primary">

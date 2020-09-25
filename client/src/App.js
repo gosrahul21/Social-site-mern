@@ -18,7 +18,7 @@ import AddExperience from './components/profile-forms/AddExperience';
 import AddEducation from './components/profile-forms/AddEducation'
 import Profiles from './components/profiles/Profiles'
 import Profile from './components/profile/Profile'
-
+import Posts from './components/posts/Posts'
 
 
 const App = () => {
@@ -50,6 +50,7 @@ const App = () => {
                    <PrivateRoute exact path="/edit-profile" component={CreateProfile}/>
                    <Route exact path="/getAllProfiles" component={Profiles}/>
                    <Route exact path="/profile/:id" component={Profile}/>
+                   <PrivateRoute exact path ="/post" component ={Posts}/>
                </Switch>
            </section>
         </div>

@@ -363,7 +363,10 @@
     line-height: 1.8;
     margin-bottom: 1rem;
   }
-  
+  .img-avatar{
+    background-image: url("https://www.gravatar.com/avatar/HASH?d=mp");
+   
+  }
   /* Profile Page */
   .profile-grid {
     display: grid;
